@@ -1,0 +1,17 @@
+from flask import Flask
+from controller import home, stage_1, stage_2, stage_3
+
+app = Flask(__name__, template_folder = "view", static_folder="view/static",)
+app.config.update(dict(
+    DEBUG=True,
+    SECRET_KEY="secret_key",
+    SEND_FILE_MAX_AGE_DEFAULT=0,
+))
+app.config.from_envvar("TC_SETTINGS", silent=True)
+
+app.register_blueprint(home)
+app.register_blueprint(stage_1)
+app.register_blueprint(stage_2)
+app.register_blueprint(stage_3)
+
+app.run()
