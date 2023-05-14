@@ -85,12 +85,15 @@ def get_eigenvector_centralities(network):
     return centralities
 
 def simplify_network(network, chosen_nodes):
-    level_1_edges = network[network.child_node.isin(chosen_nodes)] # think carefully why this works\
+    level_1_edges = network[network.child_node.isin(chosen_nodes)]
+    level_1_node = level_1_edges.reset_index(drop=True)["parent_node"][0]
+    level_1_edges = level_1_edges[level_1_edges["parent_node"] == level_1_node]
     simplified_network = [level_1_edges, ]
     num_level_3 = 7
     for chosen_node in chosen_nodes:
         level_2_edges = network[network["parent_node"] == chosen_node]
-        level_2_edges = level_2_edges.sample(num_level_3, replace = True) # if sample more than total then overlap the edge
+        if len(level_2_edges) > num_level_3:
+            level_2_edges = level_2_edges.sample(num_level_3, replace = False)
         simplified_network.append(level_2_edges)
     return pd.concat(simplified_network)
 

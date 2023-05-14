@@ -20,9 +20,8 @@ def stage1():
 @stage_2.route("/stage_2")
 def stage2():
     is_reselect = request.args.to_dict().get("is_reselect")
-    if not is_reselect: # navigating from stage_1
+    if not is_reselect: # navigating from stage_1, else from stage_3
         service.crawl_review()
-    # else navigating from stage_3
     return render_template("stage_2.html")
 
 @stage_3.route("/stage_3", methods=["GET","POST"])

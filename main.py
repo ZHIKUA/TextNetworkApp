@@ -3,7 +3,7 @@ from controller import home, stage_1, stage_2, stage_3
 
 app = Flask(__name__, template_folder = "view", static_folder="view/static",)
 app.config.update(dict(
-    DEBUG=True,
+    DEBUG=False,
     SECRET_KEY="secret_key",
     SEND_FILE_MAX_AGE_DEFAULT=0,
 ))

@@ -23,21 +23,22 @@ def get_level_2(level_1):
     print("drawing network...")
     network = utility.get_network(reviews, level_1)
     print("calculating centralities...")
-    network.to_excel("cache/network.xlsx")
+    network.to_excel("cache/network.xlsx", index=False)
     level_2 = utility.get_eigenvector_centralities(network)
     json.dump(level_2, open('cache/level_2.json', 'w'))    
     print("results returned")
     return level_2
 
 def get_network(chosen_nodes):
-    network = pd.read_excel("cache/network.xlsx") # read from memory
+    network = pd.read_excel("cache/network.xlsx")
     simplified_network = utility.simplify_network(network, chosen_nodes)
     fig = utility.visualize_network(simplified_network)
     fig.savefig("view/static/network.jpg")
 
 if __name__ == "__main__":
     # stage 1
-#    crawl()
+#    crawl_link("robot vacuum")
+#    crawl_review()
     
     # stage 2
 #    level_2 = get_level_2("watch")
