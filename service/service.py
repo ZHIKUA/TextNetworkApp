@@ -1,6 +1,6 @@
 import os
 import json
-import utility
+import utility.util as utility
 import pandas as pd
 
 def crawl_link(product_name):
@@ -33,7 +33,7 @@ def get_network(chosen_nodes):
     network = pd.read_excel("cache/network.xlsx")
     simplified_network = utility.simplify_network(network, chosen_nodes)
     fig = utility.visualize_network(simplified_network)
-    fig.savefig("view/static/network.jpg")
+    fig.savefig("view/static/network.jpg",bbox_inches='tight')
 
 if __name__ == "__main__":
     # stage 1

@@ -1,5 +1,5 @@
 import json
-import service
+import service.service as service
 from flask import render_template, Blueprint, request
 
 home = Blueprint("home", __name__)

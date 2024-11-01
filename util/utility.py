@@ -105,6 +105,7 @@ def visualize_network(network): # the first row is assured to be level 1 node. p
 
     node_label = [i for i in dict(G.nodes).keys()]
     node_label = {i:i for i in dict(G.nodes).keys()}
+    plt.margins(0,0)
     fig, ax = plt.subplots(figsize=(20, 20))
 
     df = pd.DataFrame(data = [[0,]*len(G.nodes()),]*len(G.nodes()), 

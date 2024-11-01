@@ -3,12 +3,11 @@
 
 <head>
 <title>IS607</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
-crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="./static/styles/stylesheet.css">
 <link rel="icon" href="static/icon.jpg" type = "image/x-icon">
 {% set get_network ="/stage_3?level_1="+level_1 %}
 </head>
-
 
 <body>
 
@@ -16,51 +15,46 @@ crossorigin="anonymous">
   <a class="navbar-brand" href="/">IS607</a>
 </nav>
 
-<div class="row">
+<div class="stage3_container">
 
-<div class="column">
-<div class="container">
-	<br>
-	<div class="row"> 
-	<p style="margin-left:0.5cm">Level 1: {{level_1}}</p>
-	<a href="/stage_2?is_reselect=true" class="btn btn-primary" style="margin-left:3.5cm">Try Another Keyword</a>
-	</div>
-	<br>
-	<div> 3. Pick the level 2 keywords: </div>
-	<br>
-	
+  <div class="stage3_column">
+  
+	<div class="stage3_row"> 	  
+      <p>Level 1: {{level_1}}</p>
+      <a href="/stage_2?is_reselect=true" class="stage3_button btn btn-primary">Try Another Keyword</a>      
+	</div>	
+
     <form action = {{get_network}} method="post">
-        <input type="submit" value="Generate Network" class="form-control btn btn-primary">
-    	<br><br>
-
-    	<table class="table table-striped table-bordered">
-    	<thead class="table-dark">
-    		<tr>
-    			<th scope="col">Level 2 Node</th>
-    			<th scope="col">Eigenvector Centrality</th>
-    			<th scope="col">Selection</th>
-    		</tr>
+      <div class="stage3_row"> 	  
+        <p> 3. Pick the level 2 keywords: </p>	
+        <input type="submit" value="Generate Network" class="stage3_button btn btn-primary">
+      </div>	
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+          <th scope="col">Level 2 Node</th>
+          <th scope="col">Eigenvector Centrality</th>
+          <th scope="col">Selection</th>
+        </tr>
     	</thead>
     	<tbody>
-    		{% for node, centrality in level_2.items() %}
-    		<tr>
-    			<td>{{node}}</td>
-    			<td>{{centrality}}</td>
-    			<td><input type="checkbox" value={{node}} name="chosen_nodes" id="chosen_nodes"></td>
-    		</tr>
-    		{% endfor %}
+    	  {% for node, centrality in level_2.items() %}
+    	  <tr>
+    	    <td>{{node}}</td>
+    	    <td>{{centrality}}</td>
+    	    <td><input type="checkbox" value={{node}} name="chosen_nodes" id="chosen_nodes"></td>
+    	  </tr>
+    	  {% endfor %}
     	</tbody>
     	</table>	
     </form>
-    
-</div>
-</div>
+  </div>
 
-<div class="column">
+  <div class="stage3_column">
     {% if chosen_nodes %}
-    	<img src="static/network.jpg" style="width:700px;height:700px;">
+      <img src="static/network.jpg" class="stage3_image">
 	{% endif %}
-</div>
+  </div>
 
 </div>
 
