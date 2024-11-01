@@ -1,36 +1,42 @@
 import json
 import service.service as service
-from flask import render_template, Blueprint, request
+from flask import render_template, Blueprint, request, redirect
 
 home = Blueprint("home", __name__)
-stage_1 = Blueprint("stage_1", __name__)
-stage_2 = Blueprint("stage_2", __name__)
-stage_3 = Blueprint("stage_3", __name__)
+analyze_data = Blueprint("analyze_data", __name__)
+craw_links = Blueprint("craw_links", __name__)
+craw_reviews = Blueprint("craw_reviews", __name__)
+generate_level_2 = Blueprint("generate_level_2", __name__)
+generate_level_3 = Blueprint("generate_level_3", __name__)
 
 @home.route("/")
 def index():
     return render_template("home.html")
 
-@stage_1.route("/stage_1")
-def stage1():
-    product_name = request.args.to_dict().get("product_name").replace(" ","+")
+@analyze_data.route("/analyze_data")
+def analyze_data_controller():
+    level_2 = json.load(open('cache/level_2.json', 'r'))
+    return render_template("analyze_data.html", level_2=level_2)
+
+@craw_links.route("/craw_links", methods=["POST"])
+def craw_links_controller():
+    product_name = request.form.get("product_name").replace(" ","+")
     service.crawl_link(product_name)
-    return render_template("stage_1.html")
+    return redirect("home.html")
 
-@stage_2.route("/stage_2")
-def stage2():
-    is_reselect = request.args.to_dict().get("is_reselect")
-    if not is_reselect: # navigating from stage_1, else from stage_3
-        service.crawl_review()
-    return render_template("stage_2.html")
+@craw_reviews.route("/craw_reviews", methods=["POST"])
+def craw_reviews_controller():
+    service.crawl_review()
+    return redirect("analyze_data.html")
 
-@stage_3.route("/stage_3", methods=["GET","POST"])
-def stage3():
-    level_1 = request.args.to_dict().get("level_1")
+@generate_level_2.route("/generate_level_2", methods=["POST"])
+def generate_level_2_controller():
+    level_1 = request.form.get("level_1")
+    service.get_level_2(level_1) # i suppose it's written to file
+    return redirect("analyze_data.html")
+
+@generate_level_3.route("/generate_level_3", methods=["POST"])
+def generate_level_3_controller():
     chosen_nodes = request.form.getlist("chosen_nodes")
-    if not chosen_nodes: # navigating from stage_2
-        level_2 = service.get_level_2(level_1)
-    else: # nodes chosen and then generate network graph
-        level_2 = json.load(open('cache/level_2.json', 'r'))
-        service.get_network(chosen_nodes)
-    return render_template("stage_3.html", level_1=level_1, level_2=level_2, chosen_nodes=chosen_nodes)
+    service.get_network(chosen_nodes) # i suppose level_1 node can be referred
+    return redirect("analyze_data.html")

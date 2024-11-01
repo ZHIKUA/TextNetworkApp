@@ -1,6 +1,6 @@
 import os
 import json
-import utility.util as utility
+import util.utility as utility
 import pandas as pd
 
 def crawl_link(product_name):
@@ -34,16 +34,3 @@ def get_network(chosen_nodes):
     simplified_network = utility.simplify_network(network, chosen_nodes)
     fig = utility.visualize_network(simplified_network)
     fig.savefig("view/static/network.jpg",bbox_inches='tight')
-
-if __name__ == "__main__":
-    # stage 1
-#    crawl_link("robot vacuum")
-#    crawl_review()
-    
-    # stage 2
-#    level_2 = get_level_2("watch")
-#    print(level_2)
-
-    # stage 3
-    chosen_nodes = ["unfrozen", "fat", "profit", "rubbery"]
-    get_network(chosen_nodes)

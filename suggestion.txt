@@ -1,9 +1,0 @@
-suggestion: 
-button 1: navigate to latter
-button 2: crawl
-
-
-get stage_1: crawl immediately: as there is a "crawl" button in homepage ->
-for crawling, should use POST
-
-get stage_2: the second crawl button
