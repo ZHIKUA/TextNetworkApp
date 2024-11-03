@@ -1,5 +1,5 @@
 from flask import Flask
-from controller.controller import home, stage_1, stage_2, stage_3
+from controller.controller import home, analyze_data, craw_links, craw_reviews, generate_level_2, generate_level_3
 
 app = Flask(
     __name__, 
@@ -12,8 +12,10 @@ app.config.update(dict(
 ))
 
 app.register_blueprint(home)
-app.register_blueprint(stage_1)
-app.register_blueprint(stage_2)
-app.register_blueprint(stage_3)
+app.register_blueprint(analyze_data)
+app.register_blueprint(craw_links)
+app.register_blueprint(craw_reviews)
+app.register_blueprint(generate_level_2)
+app.register_blueprint(generate_level_3)
 
 app.run()

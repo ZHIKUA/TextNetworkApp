@@ -3,18 +3,9 @@
 
 <head>
 <title>IS607</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="./static/styles/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="./static/styles/stylesheet.css">
 <link rel="icon" href="static/icon.jpg" type = "image/x-icon">
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#crawl').click(function(e) {  
-			var input_value = $('#product_name').val();
-			window.location.replace("http://localhost:5000/stage_1?product_name="+input_value);
-		});
-	});
-</script> 
 </head>
 
 <body>
@@ -23,14 +14,18 @@
   <a class="navbar-brand" href="/">IS607</a>
 </nav>
 
-<div class="app_container">
-    <a href="localhost:5000/stage_2?is_reselect=true" class="app_button btn btn-primary" id="crawl">Analyze Existing Data</a>
-	<p>or, Enter Product to Crawl below and Press Crawl Links</p>
-	<input class="app_input" type="text" id="product_name"></input>
-	<a class="app_button btn btn-primary" id="crawl">Crawl Links</a>
-	<p>Crawling Successful / Error</p>
-	<a class="app_button btn btn-primary" id="crawl">Crawl Reviews</a>
-	<p>Crawling Successful / Error</p>
+<div style="padding: 30px">
+    <a id="crawl" href="analyze_data" class="btn btn-success">Analyze Existing Data</a>
+	<h5>or, Enter Product Name below and Press Crawl Links</h1>
+	<form action = "crawl_links" method="POST">
+	    <input id="product_name" class="form-control" type="text"  style="margin-bottom:30px"></input>
+	    <button type="submit" class="btn btn-primary">Crawl Links</button>
+    </form>
+	<p class="form-control" style="border: 2px solid silver;">Crawling Successful / Error</p>
+	<form action="crawl_reviews" method="POST">
+	    <button type="submit" class="btn btn-primary" style="margin-top:30px">Crawl Reviews</button>
+    </form>
+	<p class="form-control" style="border: 2px solid silver;">Crawling Successful / Error</p>
 </div>
 
 </body>
