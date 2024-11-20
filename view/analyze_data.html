@@ -16,10 +16,10 @@
 
 <div style="display:flex">
   <div style="width:50%;padding:10px">
-	<form style="display:flex;align-items:center;margin-bottom:10px" action="generate_level_2" method="POST">
+	<form action="generate_level_2" method="POST" style="display:flex;align-items:center;margin-bottom:10px">
       <label style="white-space:nowrap;margin-right:10px">Level 1 Keyword: </label>
-      <input id="product_name" class="form-control" type="text"></input>
-      <button class="btn btn-primary" style="white-space:nowrap;margin-left:10px" href="/stage_2?is_reselect=true">Generate Level 2</button>
+      <input name="level_1" class="form-control" type="text">
+      <button type="submit" class="btn btn-primary" style="white-space:nowrap;margin-left:10px">Generate Level 2</button>
     </form>
     <form action="generate_level_3" method="POST">
       <div style="display:flex;align-items:center;margin-bottom:10px">
@@ -48,9 +48,7 @@
   </div>
 
   <div style="width:50%;padding:10px">
-    {% if chosen_nodes %}
-      <img src="static/network.jpg" style="width:100%">
-	{% endif %}
+    <img src="./static/network.jpg" style="width:100%">
   </div>
 
 </div>

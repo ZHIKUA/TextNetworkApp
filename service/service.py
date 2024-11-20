@@ -1,5 +1,4 @@
 import os
-import json
 import util.utility as utility
 import pandas as pd
 
@@ -25,7 +24,6 @@ def get_level_2(level_1):
     print("calculating centralities...")
     network.to_excel("cache/network.xlsx", index=False)
     level_2 = utility.get_eigenvector_centralities(network)
-    json.dump(level_2, open('cache/level_2.json', 'w'))    
     print("results returned")
     return level_2
 

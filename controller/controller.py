@@ -22,21 +22,24 @@ def analyze_data_controller():
 def craw_links_controller():
     product_name = request.form.get("product_name").replace(" ","+")
     service.crawl_link(product_name)
-    return redirect("home.html")
+    return redirect("home")
 
 @craw_reviews.route("/craw_reviews", methods=["POST"])
 def craw_reviews_controller():
     service.crawl_review()
-    return redirect("analyze_data.html")
+    return redirect("analyze_data")
 
 @generate_level_2.route("/generate_level_2", methods=["POST"])
 def generate_level_2_controller():
-    level_1 = request.form.get("level_1")
-    service.get_level_2(level_1) # i suppose it's written to file
-    return redirect("analyze_data.html")
+#    level_1 = request.form.get("level_1")
+    level_1 = "app"
+    print("hi i'm " + str(level_1))
+    level_2 = service.get_level_2(level_1)
+    json.dump(level_2, open('cache/level_2.json', 'w'))
+    return redirect("analyze_data")
 
 @generate_level_3.route("/generate_level_3", methods=["POST"])
 def generate_level_3_controller():
     chosen_nodes = request.form.getlist("chosen_nodes")
     service.get_network(chosen_nodes) # i suppose level_1 node can be referred
-    return redirect("analyze_data.html")
+    return redirect("analyze_data")
