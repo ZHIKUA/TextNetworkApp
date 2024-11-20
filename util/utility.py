@@ -97,7 +97,7 @@ def simplify_network(network, chosen_nodes):
         simplified_network.append(level_2_edges)
     return pd.concat(simplified_network)
 
-def visualize_network(network): # the first row is assured to be level 1 node. plz name it
+def save_network_graph(network): # the first row is assured to be level 1 node. plz name it
 
     G = nx.from_pandas_edgelist(network,
                                 source = "parent_node",
@@ -123,11 +123,9 @@ def visualize_network(network): # the first row is assured to be level 1 node. p
     for k, v in pos.items():
         pos_higher[k] = (v[0], v[1]+y_off)
 
-    d = dict(G.degree)
     nx.draw_networkx_nodes(G, pos, node_color = ["blue",] + ["lightblue",] * (len(G.nodes())-1), ax = ax) # labels=True removed
 #    nx.draw_networkx_nodes(G, pos, node_color = "lightblue", labels = True, ax = ax)
     nx.draw_networkx_edges(G, pos, node_size = 1000,edge_color = "grey", width = 3, ax=ax, alpha = 0.5)
     nx.draw_networkx_labels(G, pos_higher, node_label, font_size=24, font_family = "serif", ax=ax)
-    return fig
+    fig.savefig("view/static/network.jpg",bbox_inches='tight')
     
-
